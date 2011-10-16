@@ -79,4 +79,10 @@ public class GameTest {
         rollMany(20 + 1, 5);
         assertEquals((10 + 5) * 10, instance.score());
     }
+
+    @Test
+    public void prefectGame() {
+        rollMany(12, 10);
+        assertEquals(300, instance.score());
+    }
 }

@@ -18,17 +18,18 @@ public class Game {
         }
 
         private int scoreRoll(int pins) {
+            roll(pins);
             int rollPoints = pins * popFactor();
-
-            this.pins += pins;
-            this.rolls++;
-
             if (isFinished()) {
                 updateFactors();
                 nextFrame();
             }
-
             return rollPoints;
+        }
+
+        public void roll(int pins) {
+            this.pins += pins;
+            this.rolls++;
         }
 
         public void updateFactors() {
