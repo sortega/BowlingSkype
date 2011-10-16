@@ -12,6 +12,11 @@ public class GameTest {
             instance.roll(pins);
     }
 
+    public void rollSpare() {
+        instance.roll(5);
+        instance.roll(5);
+    }
+
     public void rollStrike() {
         instance.roll(10);
     }
@@ -53,15 +58,20 @@ public class GameTest {
 
     @Test
     public void oneSpareInGame() {
-        instance.roll(5);
-        instance.roll(5);
+        rollSpare();
         rollMany(18, 1);
         assertEquals(10 + 1 + 18, instance.score());
     }
 
-//    @Test
-//    public void perfectGame() {
-//        rollMany(10+2, 10);
-//        assertEquals(300, instance.score());
-//    }
+    @Test
+    public void twoChainedSparesInGame() {
+        rollSpare();
+        rollSpare();
+        rollMany(16, 1);
+        assertEquals(
+                10 + 5 +
+                10 + 1 +
+                16, instance.score());
+    }
+
 }

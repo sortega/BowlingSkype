@@ -20,16 +20,20 @@ public class Game {
             this.rollsInFrame++;
 
             if (isFinished()) {
-                if (isStrike()) {
-                    factors[0]++;
-                    factors[1]++;
-                } else if (isSpare()) {
-                    factors[0]++;
-                }
+                updateFactors();
                 nextFrame();
             }
 
             return rollPoints;
+        }
+
+        public void updateFactors() {
+            if (isStrike()) {
+                factors[0]++;
+                factors[1]++;
+            } else if (isSpare()) {
+                factors[0]++;
+            }
         }
 
         public int popFactor() {
