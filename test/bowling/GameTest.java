@@ -74,4 +74,9 @@ public class GameTest {
                 16, instance.score());
     }
 
+    @Test
+    public void allSparesGame() {
+        rollMany(20 + 1, 5);
+        assertEquals((10 + 5) * 10, instance.score());
+    }
 }
