@@ -3,21 +3,25 @@ package bowling;
 public class Game {
 
     private static class Frame {
-        private int pinsInFrame;
-        private int rollsInFrame;
+        private static final int MAX_ROUNDS = 10;
+
+        private int pins;
+        private int rolls;
         private int[] factors;
+        private int round;
 
         public Frame() {
-            this.pinsInFrame = 0;
-            this.rollsInFrame = 0;
+            this.pins = 0;
+            this.rolls = 0;
+            this.round = 1;
             this.factors = new int[] {1, 1};
         }
 
         private int scoreRoll(int pins) {
             int rollPoints = pins * popFactor();
 
-            this.pinsInFrame += pins;
-            this.rollsInFrame++;
+            this.pins += pins;
+            this.rolls++;
 
             if (isFinished()) {
                 updateFactors();
@@ -44,21 +48,22 @@ public class Game {
         }
 
         private void nextFrame() {
-            pinsInFrame = 0;
-            rollsInFrame = 0;
+            pins = 0;
+            rolls = 0;
+            round++;
         }
 
         private boolean isStrike() {
-            return pinsInFrame == 10 && rollsInFrame == 1;
+            return pins == 10 && rolls == 1;
         }
 
         private boolean isSpare() {
-            return pinsInFrame == 10 && rollsInFrame == 2;
+            return pins == 10 && rolls == 2;
         }
 
         public boolean isFinished() {
-            return isStrike() || isSpare() ||
-                    rollsInFrame == 2;
+            return round < MAX_ROUNDS &&
+                    (isStrike() || isSpare() || rolls == 2);
         }
     }
 
